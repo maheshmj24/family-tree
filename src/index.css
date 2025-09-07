@@ -1,0 +1,70 @@
+:root {
+    --bg: #fafafa;
+    --fg: #111827;
+    --muted: #6b7280;
+}
+
+html,
+body,
+#root {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, Roboto, 'Helvetica Neue', Arial;
+}
+
+.graph-canvas {
+    width: 100%;
+    height: 70vh;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+}
+
+.focus-tree {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    padding: 12px;
+}
+
+/* App layout helpers */
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.app-title {
+    margin: 0;
+    font-weight: 700;
+}
+
+.app-search {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* limit search input width so header buttons stay visible */
+.app-search input[type="text"],
+.app-search input[type="search"] {
+    width: 240px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+}

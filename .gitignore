@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.vscode/
+*.log
+*.local
+*.zip
+.DS_Store
+
+# Family tree data folder - contains user's personal family data
+family-data/
+ROADMAP.md
