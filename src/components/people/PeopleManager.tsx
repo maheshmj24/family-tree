@@ -26,7 +26,7 @@ import {
   IconTrash,
   IconUsers,
 } from '@tabler/icons-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { usePhoto } from '../../hooks/usePhoto';
 import {
   RelationshipResolver,
@@ -36,6 +36,7 @@ import {
 } from '../../types/models';
 import { calculateAge, calculateAgeAtDeath } from '../../utils';
 import RelationshipDisplay from '../common/RelationshipDisplay';
+import styles from './PeopleManager.module.css';
 import PersonForm from './PersonForm';
 import PersonTableRow from './PersonTableRow';
 import RelationshipForm from './RelationshipForm';
@@ -118,6 +119,20 @@ function PersonDetailsView({
                 )
               );
             })()}
+            {person.deathDate && (
+              <Group justify='space-between'>
+                <Text c='dimmed'>Death Date</Text>
+                <Text>{new Date(person.deathDate).toLocaleDateString()}</Text>
+              </Group>
+            )}
+            {person.notes && (
+              <Group justify='space-between' align='flex-start'>
+                <Text c='dimmed'>Notes</Text>
+                <Text style={{ textAlign: 'right', maxWidth: '60%' }}>
+                  {person.notes}
+                </Text>
+              </Group>
+            )}
           </Stack>
         </Card.Section>
       </Card>
@@ -146,10 +161,12 @@ type Props = {
   ) => Promise<void>;
   readonly onDeleteRelationship: (relationshipId: string) => void;
   readonly onSelectPerson?: (personId: string) => void;
+  readonly onFocusPerson?: (personId: string) => void;
   readonly selectedIds?: string[];
   readonly onToggleSelection?: (personId: string) => void;
   readonly onClearSelection?: () => void;
   readonly onSelectAll?: () => void;
+  readonly selectedPersonId?: string | null;
 };
 
 export default function PeopleManager({
@@ -161,10 +178,12 @@ export default function PeopleManager({
   onAddRelationships,
   onDeleteRelationship,
   onSelectPerson,
+  onFocusPerson,
   selectedIds = [],
   onToggleSelection,
   onClearSelection,
   onSelectAll,
+  selectedPersonId: initialSelectedPersonId,
 }: Props) {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedPersonId, setSelectedPersonId] = useState<string | null>(null);
@@ -180,6 +199,13 @@ export default function PeopleManager({
     null
   );
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
+
+  // Update selected person when prop changes
+  useEffect(() => {
+    if (initialSelectedPersonId !== undefined) {
+      setSelectedPersonId(initialSelectedPersonId);
+    }
+  }, [initialSelectedPersonId]);
 
   const resolver = new RelationshipResolver(
     project.people,
@@ -308,6 +334,7 @@ export default function PeopleManager({
       // Clear selection if deleted person was selected
       if (selectedPersonId === personId) {
         setSelectedPersonId(null);
+        onSelectPerson?.('');
       }
     }
   };
@@ -357,6 +384,7 @@ export default function PeopleManager({
                 setShowOnlyUnrelated(event.currentTarget.checked)
               }
               size='sm'
+              className={styles.clickableSwitch}
             />
           </Group>
           <Group gap='md' align='center'>
@@ -552,11 +580,14 @@ export default function PeopleManager({
                           age={age}
                           relationshipStatus={relationshipStatus}
                           isSelected={selectedPersonId === person.id}
-                          onSelect={setSelectedPersonId}
+                          onSelect={(personId) => {
+                            setSelectedPersonId(personId);
+                            onSelectPerson?.(personId);
+                          }}
                           onView={setViewingPersonId}
                           onEdit={setEditingPersonId}
                           onDelete={handleDeletePerson}
-                          onFocus={onSelectPerson}
+                          onFocus={onFocusPerson || onSelectPerson}
                           isMultiSelected={selectedIds.includes(person.id)}
                           onToggleMultiSelect={onToggleSelection}
                         />
@@ -604,7 +635,10 @@ export default function PeopleManager({
                         size='xs'
                         variant='subtle'
                         color='gray'
-                        onClick={() => setSelectedPersonId(null)}
+                        onClick={() => {
+                          setSelectedPersonId(null);
+                          onSelectPerson?.('');
+                        }}
                         title='Clear selection'
                       >
                         ✕

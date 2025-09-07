@@ -264,9 +264,9 @@ export default function RelationshipForm({
 
   const isBatchMode = selectedPeople.length > 0;
 
-  // Helper function to get parent information for a person
+  // Helper function to get context information for a person to help distinguish between people with same names
   const getParentInfo = (person: Person): string => {
-    // Find direct parent relationships where this person is the child (toId)
+    // 1. First priority: Find direct parent relationships where this person is the child (toId)
     const parentRelationships = relationships.filter(
       (rel) =>
         rel.toId === person.id &&
@@ -288,7 +288,52 @@ export default function RelationshipForm({
       }
     }
 
-    // Fallback to birth year if available
+    // 2. Second priority: Find spouse relationships if no parents
+    const spouseRelationships = relationships.filter(
+      (rel) =>
+        (rel.fromId === person.id || rel.toId === person.id) &&
+        (rel.type === 'spouse' || rel.type === 'partner')
+    );
+
+    if (spouseRelationships.length > 0) {
+      const spouseNames = spouseRelationships
+        .map((rel) => {
+          const spouseId = rel.fromId === person.id ? rel.toId : rel.fromId;
+          const spouse = people.find((p) => p.id === spouseId);
+          return spouse?.displayName || 'Unknown';
+        })
+        .filter(Boolean);
+
+      if (spouseNames.length > 0) {
+        const relationshipType =
+          spouseRelationships[0].type === 'spouse' ? 'Spouse' : 'Partner';
+        return `${relationshipType} of ${spouseNames.join(' & ')}`;
+      }
+    }
+
+    // 3. Third priority: Find child relationships if no parents or spouse
+    const childRelationships = relationships.filter(
+      (rel) =>
+        rel.fromId === person.id &&
+        (rel.type === 'parent' ||
+          rel.type === 'adoptive-parent' ||
+          rel.type === 'step-parent')
+    );
+
+    if (childRelationships.length > 0) {
+      const childNames = childRelationships
+        .map((rel) => {
+          const child = people.find((p) => p.id === rel.toId);
+          return child?.displayName || 'Unknown';
+        })
+        .filter(Boolean);
+
+      if (childNames.length > 0) {
+        return `Parent of ${childNames.join(' & ')}`;
+      }
+    }
+
+    // 4. Fallback to birth year if available
     if (person.birthDate) {
       const birthYear = new Date(person.birthDate).getFullYear();
       return `Born ${birthYear}`;
@@ -378,11 +423,12 @@ export default function RelationshipForm({
 
         <Select
           label='Type (of from person)'
-          placeholder='Select relationship'
+          placeholder='Select relationship type...'
           data={relationshipOptions}
-          value={type}
-          onChange={(value) => setType(value as RelationshipType)}
+          value={type || null}
+          onChange={(value) => setType((value as RelationshipType) || '')}
           required
+          clearable
         />
 
         {/* Show "both parents" option for parent relationships */}
