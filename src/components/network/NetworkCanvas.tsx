@@ -373,29 +373,21 @@ export default function NetworkCanvas({
 
     const focusOnSelected = () => {
       if (selectedId) {
-        // Get the most current node positions from the simulation
-        const simulationNodes = simulation.nodes();
-        const selectedNode = simulationNodes.find(
-          (n: any) => n.id === selectedId
-        );
-
-        if (selectedNode?.x !== undefined && selectedNode?.y !== undefined) {
-          // Account for the visual offset of the node elements (cy=-15)
-          const visualCenterX = selectedNode.x;
-          const visualCenterY = selectedNode.y - 15; // Adjust for the cy offset
+        const selectedNode = nodes.find((n) => n.id === selectedId);
+        if (selectedNode?.x && selectedNode?.y) {
+          // Create a new transform that first scales, then translates to center
+          const scale = 1.5;
+          const transform = d3.zoomIdentity
+            .scale(scale)
+            .translate(
+              width / 2 / scale - selectedNode.x,
+              height / 2 / scale - selectedNode.y
+            );
 
           svg
             .transition()
-            .duration(750)
-            .call(
-              zoom.transform as any,
-              d3.zoomIdentity
-                .translate(
-                  width / 2 - visualCenterX,
-                  height / 2 - visualCenterY
-                )
-                .scale(1.5) // Back to 1.5x as requested
-            );
+            .duration(500)
+            .call(zoom.transform as any, transform);
         }
       }
     };
@@ -422,13 +414,12 @@ export default function NetworkCanvas({
   // Auto-focus when selectedId changes (e.g., from other tabs)
   useEffect(() => {
     if (selectedId && svgRef.current) {
-      // Small delay to ensure the simulation has rendered the nodes
       const timer = setTimeout(() => {
         const svg = svgRef.current;
         if (svg && (svg as any).__focusOnSelected) {
           (svg as any).__focusOnSelected();
         }
-      }, 200);
+      }, 300);
 
       return () => clearTimeout(timer);
     }

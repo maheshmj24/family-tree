@@ -26,7 +26,7 @@ import {
   IconTrash,
   IconUsers,
 } from '@tabler/icons-react';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { usePhoto } from '../../hooks/usePhoto';
 import {
   RelationshipResolver,
@@ -200,12 +200,33 @@ export default function PeopleManager({
   );
   const [sortDirection, setSortDirection] = useState<'asc' | 'desc'>('asc');
 
+  // Ref for scrolling to selected person
+  const tableContainerRef = useRef<HTMLDivElement>(null);
+
   // Update selected person when prop changes
   useEffect(() => {
     if (initialSelectedPersonId !== undefined) {
       setSelectedPersonId(initialSelectedPersonId);
     }
   }, [initialSelectedPersonId]);
+
+  // Scroll to selected person when selectedPersonId changes
+  useEffect(() => {
+    if (selectedPersonId && tableContainerRef.current) {
+      // Small delay to ensure the table has rendered
+      setTimeout(() => {
+        const selectedRow = tableContainerRef.current?.querySelector(
+          `[data-person-id="${selectedPersonId}"]`
+        );
+        if (selectedRow) {
+          selectedRow.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center',
+          });
+        }
+      }, 100);
+    }
+  }, [selectedPersonId]);
 
   const resolver = new RelationshipResolver(
     project.people,
@@ -446,6 +467,7 @@ export default function PeopleManager({
               </Text>
             ) : (
               <Box
+                ref={tableContainerRef}
                 style={{
                   flex: 1,
                   overflow: 'auto',

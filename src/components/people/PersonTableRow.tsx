@@ -55,6 +55,7 @@ export default function PersonTableRow({
   return (
     <Table.Tr
       key={person.id}
+      data-person-id={person.id}
       style={{
         backgroundColor: isSelected
           ? 'var(--mantine-color-yellow-0)'
