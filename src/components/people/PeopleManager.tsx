@@ -345,11 +345,6 @@ export default function PeopleManager({
         'Are you sure you want to delete this person? This will also remove all their relationships.'
       )
     ) {
-      // Remove relationships involving this person
-      project.relationships
-        .filter((rel) => rel.fromId === personId || rel.toId === personId)
-        .forEach((rel) => onDeleteRelationship(rel.id));
-
       onDeletePerson(personId);
 
       // Clear selection if deleted person was selected

@@ -9,18 +9,15 @@ A modern, interactive family tree application built with React, TypeScript, and 
 ### Current MVP Features (v0.0.1)
 
 - **👥 People Management**: Add, edit, and delete family members with detailed information
-- **� Photo Management**: Upload, crop, and optimize photos with automatic WebP conversion and file storage
-- **�🔗 Relationship Management**: Define and manage various family relationships (parent-child, spouse, partner, etc.)
+- **📷 Photo Management**: Upload, crop, and optimize photos with automatic WebP conversion and file storage
+- **🔗 Relationship Management**: Define and manage various family relationships (parent-child, spouse, partner, etc.)
 - **🌐 Interactive Network Visualization**: Explore your family network with D3.js-powered interactive graph
   - Pan, zoom, and drag functionality
   - Visual differentiation between relationship types
   - Node selection and highlighting
   - Physics-based layout with force simulation
 - **🌳 Tree View**: Hierarchical family tree view focused on specific individuals
-- **� Unified Project Folders**: Projects stored as structured folders with JSON data and optimized photos
 - **💾 Local File Storage**: Direct file system access with automatic folder validation
-- **📱 Responsive Design**: Works on desktop and mobile devices
-- **🎨 Modern UI**: Clean, intuitive interface built with Mantine UI components
 
 ### Network Visualization Details
 
@@ -43,13 +40,33 @@ A modern, interactive family tree application built with React, TypeScript, and 
 
 ## 🚀 Getting Started
 
-### Prerequisites
+### Option 1: Download Pre-built Files (Recommended for Quick Start)
+
+1. **Download the application files**:
+
+   - Clone or download this repository
+   - Copy the entire `dist` folder to any location on your computer
+   - Rename it to something like `family-tree-app` for easy identification
+
+2. **Run the application**:
+
+   - Open the `dist` folder (or whatever you renamed it to)
+   - **Double-click on `Family-Tree.bat`** (recommended)
+   - The app will automatically open in your browser with proper settings
+   - No technical knowledge required!
+
+3. **Requirements**:
+   - Windows computer
+   - Chrome or Edge browser (most computers already have these)
+   - No additional software installation needed
+
+### Option 2: Build from Source
+
+#### Prerequisites
 
 - Node.js 18+
 - npm or yarn
 - Modern web browser with File System Access API support (Chrome, Edge, Opera)
-
-### Installation
 
 1. Clone the repository:
 
@@ -98,19 +115,6 @@ src/
 └── App.tsx             # Main application component
 ```
 
-### Key Files
-
-- **`src/components/network/NetworkCanvas.tsx`**: Main D3.js interactive network component
-- **`src/components/people/PeopleManager.tsx`**: People CRUD interface with photo management
-- **`src/components/people/PersonForm.tsx`**: Person editing form with image cropping
-- **`src/components/common/ImageCrop.tsx`**: Interactive image cropping component
-- **`src/components/focus/HierarchicalFocusView.tsx`**: Tree view component
-- **`src/db/storage.ts`**: File-based storage with unified folder loading
-- **`src/utils/photo-processor.ts`**: Photo optimization and processing
-- **`src/utils/photo-loader.ts`**: Photo loading and caching system
-- **`src/types/models.ts`**: Core data models and types
-- **`src/utils/relationship-resolver.ts`**: Family relationship logic
-
 ## 🔧 Technical Stack
 
 - **Frontend**: React 18 + TypeScript
@@ -138,35 +142,6 @@ family-data/
     ├── person1.webp
     ├── person2.webp
     └── ...
-```
-
-### Data Model
-
-```typescript
-interface ProjectData {
-  metadata: {
-    name: string;
-    version: string;
-    created: string;
-    lastModified: string;
-  };
-  people: Person[];
-  relationships: Relationship[];
-}
-
-interface Person {
-  id: string;
-  displayName: string;
-  fullName?: string;
-  // ... other fields
-}
-
-interface Relationship {
-  id: string;
-  fromId: string;
-  toId: string;
-  type: RelationshipType;
-}
 ```
 
 ## 🎮 Usage
@@ -197,14 +172,6 @@ Supported relationship types:
 - Sibling relationships
 - Extended family relationships
 
-### Technical Improvements
-
-- **Performance**: Virtual rendering for very large family trees (1000+ people)
-- **Accessibility**: Enhanced screen reader support and keyboard navigation
-- **Mobile**: Improved touch gestures and mobile-specific UI
-- **Backup**: Automatic backup and version history
-- **Collaboration**: Multi-user editing with conflict resolution
-
 ## 🤝 Contributing
 
 This is currently a personal project, but contributions and suggestions are welcome! Please feel free to:
@@ -221,12 +188,6 @@ This is currently a personal project, but contributions and suggestions are welc
 - **File System Access API**: Provides user control over their data without requiring a server
 - **Mantine UI**: Comprehensive component library with excellent TypeScript support
 - **Vite**: Fast development server and optimized builds
-
-### Performance Considerations
-
-- Force simulation parameters tuned for family tree layouts
-- Efficient relationship rendering with duplicate prevention
-- Optimized re-renders using React.memo and careful dependency management
 
 ### Browser Compatibility
 
