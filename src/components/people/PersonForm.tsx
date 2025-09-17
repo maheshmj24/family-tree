@@ -11,6 +11,7 @@ import {
   Select,
   Stack,
   Text,
+  Textarea,
   TextInput,
   Tooltip,
 } from '@mantine/core';
@@ -42,6 +43,7 @@ export default function PersonForm({
   const [birthDate, setBirthDate] = useState('');
   const [deathDate, setDeathDate] = useState('');
   const [alive, setAlive] = useState<boolean>(true);
+  const [notes, setNotes] = useState('');
   const [imageDataUrl, setImageDataUrl] = useState<string | undefined>(
     undefined
   );
@@ -73,6 +75,7 @@ export default function PersonForm({
       setBirthDate('');
       setDeathDate('');
       setAlive(true);
+      setNotes('');
       setImageDataUrl(undefined);
       setSelectedFile(null);
       setIsSubmitting(false);
@@ -86,6 +89,7 @@ export default function PersonForm({
       setBirthDate(initial.birthDate ?? '');
       setDeathDate(initial.deathDate ?? '');
       setAlive(initial.alive ?? true);
+      setNotes(initial.notes ?? '');
     }
   }, [open, initial]);
 
@@ -152,6 +156,17 @@ export default function PersonForm({
     setIsSubmitting(true);
 
     try {
+      // Validate required fields
+      if (!fullName.trim()) {
+        alert('Please enter a full name');
+        return;
+      }
+
+      if (!gender) {
+        alert('Please select a gender');
+        return;
+      }
+
       // Use existing ID if editing, otherwise generate new one
       const id =
         initial?.id ||
@@ -196,10 +211,11 @@ export default function PersonForm({
         displayName: fullName || nickname || 'Unnamed',
         fullName: fullName || undefined,
         nickname: nickname || undefined,
-        gender: (gender as 'male' | 'female' | 'other') || undefined,
+        gender: gender as 'male' | 'female' | 'other',
         birthDate: birthDate || undefined,
         deathDate: alive ? undefined : deathDate || undefined,
         alive: alive,
+        notes: notes || undefined,
         avatar: avatarPath,
         createdAt: initial?.createdAt || now,
         updatedAt: now,
@@ -332,7 +348,7 @@ export default function PersonForm({
                       { value: 'female', label: 'Female' },
                       { value: 'other', label: 'Other' },
                     ]}
-                    clearable
+                    required
                   />
                 </Stack>
               </Box>
@@ -373,6 +389,26 @@ export default function PersonForm({
             </Card.Section>
           </Card>
 
+          {/* Additional Information */}
+          <Card withBorder>
+            <Card.Section withBorder inheritPadding py='sm'>
+              <Text fw={600}>Additional Information</Text>
+            </Card.Section>
+            <Card.Section inheritPadding py='md'>
+              <Textarea
+                label='Notes'
+                value={notes}
+                onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) =>
+                  setNotes(e.currentTarget.value)
+                }
+                placeholder='Add any additional information about this person (residence, occupation, interests, etc.)'
+                minRows={3}
+                maxRows={6}
+                autosize
+              />
+            </Card.Section>
+          </Card>
+
           {/* Form actions */}
           <Group justify='flex-end' gap='sm'>
             {onCancel && (
@@ -383,7 +419,7 @@ export default function PersonForm({
             <Button
               type='submit'
               loading={isSubmitting}
-              disabled={!fullName.trim()}
+              disabled={!fullName.trim() || !gender}
             >
               {initial ? 'Update' : 'Add'} Person
             </Button>

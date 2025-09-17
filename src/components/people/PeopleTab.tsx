@@ -12,10 +12,12 @@ type Props = {
   ) => Promise<void>;
   readonly onDeleteRelationship: (relationshipId: string) => void;
   readonly onSelectPerson: (personId: string) => void;
+  readonly onFocusPerson?: (personId: string) => void;
   readonly selectedIds: string[];
   readonly onToggleSelection: (personId: string) => void;
   readonly onClearSelection: () => void;
   readonly onSelectAll: () => void;
+  readonly selectedPersonId?: string | null;
 };
 
 export default function PeopleTab({
@@ -27,10 +29,12 @@ export default function PeopleTab({
   onAddRelationships,
   onDeleteRelationship,
   onSelectPerson,
+  onFocusPerson,
   selectedIds,
   onToggleSelection,
   onClearSelection,
   onSelectAll,
+  selectedPersonId,
 }: Props) {
   return (
     <PeopleManager
@@ -42,10 +46,12 @@ export default function PeopleTab({
       onAddRelationships={onAddRelationships}
       onDeleteRelationship={onDeleteRelationship}
       onSelectPerson={onSelectPerson}
+      onFocusPerson={onFocusPerson}
       selectedIds={selectedIds}
       onToggleSelection={onToggleSelection}
       onClearSelection={onClearSelection}
       onSelectAll={onSelectAll}
+      selectedPersonId={selectedPersonId}
     />
   );
 }

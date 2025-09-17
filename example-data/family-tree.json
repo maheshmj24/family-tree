@@ -1,0 +1,325 @@
+{
+  "people": [
+    {
+      "id": "hashirama-senju",
+      "displayName": "Hashirama Senju",
+      "fullName": "Hashirama Senju",
+      "gender": "male",
+      "birthDate": "1932-10-23",
+      "deathDate": "1963-07-15",
+      "alive": false,
+      "notes": "First Hokage of Konohagakure, known as the God of Shinobi. Founded the Hidden Leaf Village with Madara Uchiha."
+    },
+    {
+      "id": "mito-uzumaki",
+      "displayName": "Mito Uzumaki",
+      "fullName": "Mito Uzumaki",
+      "gender": "female",
+      "birthDate": "1934-08-15",
+      "deathDate": "1967-12-02",
+      "alive": false,
+      "notes": "First jinchūriki of the Nine-Tails, wife of Hashirama Senju. From the Uzumaki clan."
+    },
+    {
+      "id": "minato-namikaze",
+      "displayName": "Minato Namikaze",
+      "fullName": "Minato Namikaze",
+      "nickname": "Yellow Flash",
+      "gender": "male",
+      "birthDate": "1975-01-25",
+      "deathDate": "1990-10-10",
+      "alive": false,
+      "notes": "Fourth Hokage of Konohagakure. Known as the Yellow Flash of the Leaf. Died sealing the Nine-Tails.",
+      "avatar": "photos/minato-namikaze.webp",
+      "createdAt": "2025-09-17T19:05:25.925Z",
+      "updatedAt": "2025-09-17T19:06:02.461Z"
+    },
+    {
+      "id": "kushina-uzumaki",
+      "displayName": "Kushina Uzumaki",
+      "fullName": "Kushina Uzumaki",
+      "nickname": "Red Hot-Blooded Habanero",
+      "gender": "female",
+      "birthDate": "1975-07-10",
+      "deathDate": "1990-10-10",
+      "alive": false,
+      "notes": "Second jinchūriki of the Nine-Tails, wife of Minato. From the Uzumaki clan, known for her fiery personality.",
+      "avatar": "photos/kushina-uzumaki.webp",
+      "createdAt": "2025-09-17T19:05:48.714Z",
+      "updatedAt": "2025-09-17T19:05:48.714Z"
+    },
+    {
+      "id": "naruto-uzumaki",
+      "displayName": "Naruto Uzumaki",
+      "fullName": "Naruto Uzumaki",
+      "nickname": "Number One Hyperactive Knucklehead Ninja",
+      "gender": "male",
+      "birthDate": "1990-10-10",
+      "alive": true,
+      "notes": "Seventh Hokage of Konohagakure, jinchūriki of the Nine-Tails. Hero of the Fourth Shinobi World War.",
+      "avatar": "photos/naruto-uzumaki.webp",
+      "createdAt": "2025-09-17T19:01:36.936Z",
+      "updatedAt": "2025-09-17T19:01:36.936Z"
+    },
+    {
+      "id": "hinata-hyuga",
+      "displayName": "Hinata Uzumaki (née Hyūga)",
+      "fullName": "Hinata Uzumaki (née Hyūga)",
+      "gender": "female",
+      "birthDate": "1990-12-27",
+      "alive": true,
+      "notes": "Former heiress of the Hyūga clan, wife of Naruto. Gentle and kind-hearted ninja with Byakugan.",
+      "avatar": "photos/hinata-hyuga.webp",
+      "createdAt": "2025-09-17T19:03:04.545Z",
+      "updatedAt": "2025-09-17T19:03:04.545Z"
+    },
+    {
+      "id": "boruto-uzumaki",
+      "displayName": "Boruto Uzumaki",
+      "fullName": "Boruto Uzumaki",
+      "gender": "male",
+      "birthDate": "2012-03-27",
+      "alive": true,
+      "notes": "Eldest son of Naruto and Hinata. Possesses the Jougan and karma mark.",
+      "avatar": "photos/boruto-uzumaki.webp",
+      "createdAt": "2025-09-17T19:03:27.051Z",
+      "updatedAt": "2025-09-17T19:05:07.843Z"
+    },
+    {
+      "id": "himawari-uzumaki",
+      "displayName": "Himawari Uzumaki",
+      "fullName": "Himawari Uzumaki",
+      "gender": "female",
+      "birthDate": "2014-08-01",
+      "alive": true,
+      "notes": "Youngest daughter of Naruto and Hinata. Has awakened the Byakugan.",
+      "avatar": "photos/himawari-uzumaki.webp",
+      "createdAt": "2025-09-17T18:57:13.252Z",
+      "updatedAt": "2025-09-17T18:57:13.252Z"
+    },
+    {
+      "id": "hiashi-hyuga",
+      "displayName": "Hiashi Hyūga",
+      "fullName": "Hiashi Hyūga",
+      "gender": "male",
+      "birthDate": "1968-01-08",
+      "alive": true,
+      "notes": "Head of the Hyūga clan, father of Hinata and Hanabi. Master of the Gentle Fist technique."
+    },
+    {
+      "id": "hanabi-hyuga",
+      "displayName": "Hanabi Hyūga",
+      "fullName": "Hanabi Hyūga",
+      "gender": "female",
+      "birthDate": "1993-03-27",
+      "alive": true,
+      "notes": "Younger sister of Hinata, current heiress of the Hyūga clan after Hinata married into the Uzumaki family."
+    },
+    {
+      "id": "sasuke-uchiha",
+      "displayName": "Sasuke Uchiha",
+      "fullName": "Sasuke Uchiha",
+      "gender": "male",
+      "birthDate": "1990-07-23",
+      "alive": true,
+      "notes": "Last surviving member of the Uchiha clan, teammate and rival of Naruto. Possesses the Rinnegan."
+    },
+    {
+      "id": "sakura-haruno",
+      "displayName": "Sakura Haruno",
+      "fullName": "Sakura Uchiha (née Haruno)",
+      "gender": "female",
+      "birthDate": "1991-03-28",
+      "alive": true,
+      "notes": "Medical ninja and former student of Tsunade, wife of Sasuke. Member of the original Team 7."
+    },
+    {
+      "id": "sarada-uchiha",
+      "displayName": "Sarada Uchiha",
+      "fullName": "Sarada Uchiha",
+      "gender": "female",
+      "birthDate": "2012-03-31",
+      "alive": true,
+      "notes": "Daughter of Sasuke and Sakura. Possesses the Sharingan and dreams of becoming Hokage."
+    },
+    {
+      "id": "fugaku-uchiha",
+      "displayName": "Fugaku Uchiha",
+      "fullName": "Fugaku Uchiha",
+      "gender": "male",
+      "birthDate": "1945-08-16",
+      "deathDate": "1989-04-15",
+      "alive": false,
+      "notes": "Head of the Uchiha clan, father of Sasuke and Itachi. Killed during the Uchiha Massacre."
+    },
+    {
+      "id": "mikoto-uchiha",
+      "displayName": "Mikoto Uchiha",
+      "fullName": "Mikoto Uchiha",
+      "gender": "female",
+      "birthDate": "1947-06-01",
+      "deathDate": "1989-04-15",
+      "alive": false,
+      "notes": "Mother of Sasuke and Itachi, wife of Fugaku. Friend of Kushina Uzumaki."
+    },
+    {
+      "id": "itachi-uchiha",
+      "displayName": "Itachi Uchiha",
+      "fullName": "Itachi Uchiha",
+      "gender": "male",
+      "birthDate": "1983-06-09",
+      "deathDate": "2009-07-14",
+      "alive": false,
+      "notes": "Older brother of Sasuke. Sacrificed everything to protect the village and his younger brother."
+    }
+  ],
+  "relationships": [
+    {
+      "id": "hashirama-mito-marriage",
+      "fromId": "hashirama-senju",
+      "toId": "mito-uzumaki",
+      "type": "spouse",
+      "notes": "Political marriage that united the Senju and Uzumaki clans"
+    },
+    {
+      "id": "minato-kushina-marriage",
+      "fromId": "minato-namikaze",
+      "toId": "kushina-uzumaki",
+      "type": "spouse",
+      "notes": "Love marriage, both died protecting their newborn son"
+    },
+    {
+      "id": "minato-naruto-parent",
+      "fromId": "minato-namikaze",
+      "toId": "naruto-uzumaki",
+      "type": "parent",
+      "notes": "Father who sealed the Nine-Tails in his son to save the village"
+    },
+    {
+      "id": "kushina-naruto-parent",
+      "fromId": "kushina-uzumaki",
+      "toId": "naruto-uzumaki",
+      "type": "parent",
+      "notes": "Mother who gave her life to protect Naruto and the village"
+    },
+    {
+      "id": "naruto-hinata-marriage",
+      "fromId": "naruto-uzumaki",
+      "toId": "hinata-hyuga",
+      "type": "spouse",
+      "notes": "Childhood crush that blossomed into true love"
+    },
+    {
+      "id": "naruto-boruto-parent",
+      "fromId": "naruto-uzumaki",
+      "toId": "boruto-uzumaki",
+      "type": "parent",
+      "notes": "Father-son relationship complicated by Naruto's Hokage duties"
+    },
+    {
+      "id": "naruto-himawari-parent",
+      "fromId": "naruto-uzumaki",
+      "toId": "himawari-uzumaki",
+      "type": "parent",
+      "notes": "Loving father-daughter relationship"
+    },
+    {
+      "id": "hinata-boruto-parent",
+      "fromId": "hinata-hyuga",
+      "toId": "boruto-uzumaki",
+      "type": "parent",
+      "notes": "Caring mother who supports her children's dreams"
+    },
+    {
+      "id": "hinata-himawari-parent",
+      "fromId": "hinata-hyuga",
+      "toId": "himawari-uzumaki",
+      "type": "parent",
+      "notes": "Mother teaching daughter about Hyūga traditions"
+    },
+    {
+      "id": "hiashi-hinata-parent",
+      "fromId": "hiashi-hyuga",
+      "toId": "hinata-hyuga",
+      "type": "parent",
+      "notes": "Initially disappointed in Hinata's gentle nature, later proud of her strength"
+    },
+    {
+      "id": "hiashi-hanabi-parent",
+      "fromId": "hiashi-hyuga",
+      "toId": "hanabi-hyuga",
+      "type": "parent",
+      "notes": "Trained Hanabi as the next clan heir"
+    },
+    {
+      "id": "sasuke-sakura-marriage",
+      "fromId": "sasuke-uchiha",
+      "toId": "sakura-haruno",
+      "type": "spouse",
+      "notes": "Long-distance relationship due to Sasuke's atonement journey"
+    },
+    {
+      "id": "sasuke-sarada-parent",
+      "fromId": "sasuke-uchiha",
+      "toId": "sarada-uchiha",
+      "type": "parent",
+      "notes": "Absent father trying to reconnect with his daughter"
+    },
+    {
+      "id": "sakura-sarada-parent",
+      "fromId": "sakura-haruno",
+      "toId": "sarada-uchiha",
+      "type": "parent",
+      "notes": "Single mother raising Sarada while Sasuke travels"
+    },
+    {
+      "id": "fugaku-sasuke-parent",
+      "fromId": "fugaku-uchiha",
+      "toId": "sasuke-uchiha",
+      "type": "parent",
+      "notes": "Father who was killed in the Uchiha Massacre"
+    },
+    {
+      "id": "fugaku-itachi-parent",
+      "fromId": "fugaku-uchiha",
+      "toId": "itachi-uchiha",
+      "type": "parent",
+      "notes": "Father who expected great things from his prodigious elder son"
+    },
+    {
+      "id": "mikoto-sasuke-parent",
+      "fromId": "mikoto-uchiha",
+      "toId": "sasuke-uchiha",
+      "type": "parent",
+      "notes": "Loving mother killed in the Uchiha Massacre"
+    },
+    {
+      "id": "mikoto-itachi-parent",
+      "fromId": "mikoto-uchiha",
+      "toId": "itachi-uchiha",
+      "type": "parent",
+      "notes": "Mother who loved both her sons equally"
+    },
+    {
+      "id": "fugaku-mikoto-marriage",
+      "fromId": "fugaku-uchiha",
+      "toId": "mikoto-uchiha",
+      "type": "spouse",
+      "notes": "Married couple, heads of the Uchiha clan"
+    },
+    {
+      "id": "kushina-mito-related",
+      "fromId": "kushina-uzumaki",
+      "toId": "mito-uzumaki",
+      "type": "other",
+      "notes": "Distant relatives from the Uzumaki clan"
+    },
+    {
+      "id": "mikoto-kushina-friend",
+      "fromId": "mikoto-uchiha",
+      "toId": "kushina-uzumaki",
+      "type": "other",
+      "notes": "Close friends who were both pregnant at the same time"
+    }
+  ]
+}

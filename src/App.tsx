@@ -134,6 +134,11 @@ export default function App() {
     setActiveTab('focus'); // Switch to tree view when selecting a person
   }
 
+  function selectPersonWithoutTabChange(personId: string) {
+    // Handle unselect (empty string) or regular selection
+    setSelectedId(personId || null); // Only set selection, don't change tabs
+  }
+
   function selectPersonInGraph(personId: string) {
     // Handle unselect (empty string) or regular selection
     setSelectedId(personId || null); // Only set selection, don't change tabs
@@ -289,11 +294,13 @@ export default function App() {
                     onAddRelationship={addRelationship}
                     onAddRelationships={addRelationships}
                     onDeleteRelationship={deleteRelationship}
-                    onSelectPerson={selectPerson}
+                    onSelectPerson={selectPersonWithoutTabChange}
+                    onFocusPerson={selectPerson}
                     selectedIds={selectedIds}
                     onToggleSelection={togglePersonSelection}
                     onClearSelection={clearSelection}
                     onSelectAll={selectAllPeople}
+                    selectedPersonId={selectedId}
                   />
                 </div>
               )}

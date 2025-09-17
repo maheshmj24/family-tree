@@ -4,6 +4,7 @@ import {
   IconHome,
   IconMinus,
   IconPlus,
+  IconRefresh,
   IconX,
 } from '@tabler/icons-react';
 import * as d3 from 'd3';
@@ -12,6 +13,9 @@ import { useMultiplePhotos } from '../../hooks/useMultiplePhotos';
 import { type Person, type ProjectData } from '../../types/models';
 import { getFirstName } from '../../utils';
 import styles from './NetworkCanvas.module.css';
+
+// Store node positions globally to persist across tab switches
+const savedNodePositions = new Map<string, { x: number; y: number }>();
 
 type Props = {
   readonly project: ProjectData;
@@ -42,6 +46,7 @@ export default function NetworkCanvas({
   const svgRef = useRef<SVGSVGElement>(null);
   const [nodeCount, setNodeCount] = useState(0);
   const [zoomLevel, setZoomLevel] = useState(1);
+  const [layoutKey, setLayoutKey] = useState(0); // For forcing re-layout
 
   // Use the new hook to load photos for all people
   const { photoUrls } = useMultiplePhotos(project?.people || []);
@@ -75,10 +80,18 @@ export default function NetworkCanvas({
     const container = svg.append('g').attr('class', 'zoom-container');
 
     // Prepare data
-    const nodes: D3Node[] = project.people.map((person) => ({
-      id: person.id,
-      person,
-    }));
+    const nodes: D3Node[] = project.people.map((person) => {
+      const savedPosition = savedNodePositions.get(person.id);
+      return {
+        id: person.id,
+        person,
+        // If we have saved positions, use them as initial positions
+        ...(savedPosition && {
+          x: savedPosition.x,
+          y: savedPosition.y,
+        }),
+      };
+    });
 
     // Create comprehensive links showing all family relationships
     const links: D3Link[] = [];
@@ -137,16 +150,11 @@ export default function NetworkCanvas({
         d3
           .forceLink(links)
           .id((d: any) => d.id)
-          .distance(100) // Keep original family grouping distance
+          .distance(100)
       )
-      .force('charge', d3.forceManyBody().strength(-300)) // Keep original repulsion
+      .force('charge', d3.forceManyBody().strength(-300))
       .force('center', d3.forceCenter(width / 2, height / 2))
-      .force(
-        'collision',
-        d3.forceCollide()
-        // .radius(35) // Just slightly increase from 30 to 35 to prevent overlaps
-        // .strength(0.8) // Slightly gentler collision avoidance to preserve grouping
-      );
+      .force('collision', d3.forceCollide().radius(30));
 
     // Create links (edges)
     const link = container
@@ -309,6 +317,10 @@ export default function NetworkCanvas({
       })
       .on('end', (event, d) => {
         if (!event.active) simulation.alphaTarget(0);
+        // Save the position when user finishes dragging
+        if (d.x !== undefined && d.y !== undefined) {
+          savedNodePositions.set(d.id, { x: d.x, y: d.y });
+        }
         d.fx = null;
         d.fy = null;
       });
@@ -363,18 +375,19 @@ export default function NetworkCanvas({
       if (selectedId) {
         const selectedNode = nodes.find((n) => n.id === selectedId);
         if (selectedNode?.x && selectedNode?.y) {
+          // Create a new transform that first scales, then translates to center
+          const scale = 1.5;
+          const transform = d3.zoomIdentity
+            .scale(scale)
+            .translate(
+              width / 2 / scale - selectedNode.x,
+              height / 2 / scale - selectedNode.y
+            );
+
           svg
             .transition()
             .duration(500)
-            .call(
-              zoom.transform as any,
-              d3.zoomIdentity
-                .translate(
-                  width / 2 - selectedNode.x,
-                  height / 2 - selectedNode.y
-                )
-                .scale(1.5)
-            );
+            .call(zoom.transform as any, transform);
         }
       }
     };
@@ -387,10 +400,30 @@ export default function NetworkCanvas({
 
     // Cleanup function
     return () => {
+      // Save all current positions before unmounting
+      nodes.forEach((node) => {
+        if (node.x !== undefined && node.y !== undefined) {
+          savedNodePositions.set(node.id, { x: node.x, y: node.y });
+        }
+      });
       simulation.stop();
       // No React roots to clean up since we're using pure SVG
     };
-  }, [project, selectedId, onSelect, photoUrls]);
+  }, [project, selectedId, onSelect, photoUrls, layoutKey]);
+
+  // Auto-focus when selectedId changes (e.g., from other tabs)
+  useEffect(() => {
+    if (selectedId && svgRef.current) {
+      const timer = setTimeout(() => {
+        const svg = svgRef.current;
+        if (svg && (svg as any).__focusOnSelected) {
+          (svg as any).__focusOnSelected();
+        }
+      }, 300);
+
+      return () => clearTimeout(timer);
+    }
+  }, [selectedId]);
 
   const handleZoomIn = () => {
     const svg = svgRef.current;
@@ -418,6 +451,13 @@ export default function NetworkCanvas({
     if (svg && (svg as any).__focusOnSelected) {
       (svg as any).__focusOnSelected();
     }
+  };
+
+  const handleResetLayout = () => {
+    // Clear all saved positions to force natural layout
+    savedNodePositions.clear();
+    // Trigger re-render
+    setLayoutKey((prev) => prev + 1);
   };
 
   if (!project || project.people.length === 0) {
@@ -458,6 +498,11 @@ export default function NetworkCanvas({
         </div>
 
         <Group gap='xs'>
+          <Tooltip label='Reset Layout'>
+            <ActionIcon variant='light' onClick={handleResetLayout}>
+              <IconRefresh size={16} />
+            </ActionIcon>
+          </Tooltip>
           <Tooltip label='Reset View'>
             <ActionIcon variant='light' onClick={handleResetView}>
               <IconHome size={16} />
