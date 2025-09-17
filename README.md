@@ -4,6 +4,23 @@ A modern, interactive family tree application built with React, TypeScript, and 
 
 ![Family Tree App](https://img.shields.io/badge/React-18.2.0-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5.0.4-blue) ![D3.js](https://img.shields.io/badge/D3.js-7.9.0-orange) ![Mantine](https://img.shields.io/badge/Mantine-8.2.8-cyan)
 
+## 📸 Screenshots
+
+### 👥 People Management
+
+![People Tab](screenshots/people.png)
+_Manage family members, add photos, and define relationships_
+
+### 🌐 Interactive Network View
+
+![Network Tab](screenshots/network.png)
+_Explore your family connections with an interactive D3.js visualization_
+
+### 🌳 Hierarchical Tree View
+
+![Tree Tab](screenshots/tree.png)
+_View traditional family trees focused on specific individuals_
+
 ## ✨ Features
 
 ### Current MVP Features (v0.0.1)

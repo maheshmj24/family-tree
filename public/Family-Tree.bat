@@ -11,28 +11,28 @@ echo.
 
 REM Try Edge (newer versions first)
 if exist "%ProgramFiles%\Microsoft\Edge\Application\msedge.exe" (
-    start "" "%ProgramFiles%\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-edge" --allow-file-access-from-files "%~dp0index.html"
+    start "" "%ProgramFiles%\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-edge" --allow-file-access-from-files --no-first-run --no-default-browser-check --disable-default-apps "%~dp0index.html"
     echo App opened in Edge!
     goto :success
 )
 
 REM Try Edge (x86)
 if exist "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe" (
-    start "" "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-edge" --allow-file-access-from-files "%~dp0index.html"
+    start "" "%ProgramFiles(x86)%\Microsoft\Edge\Application\msedge.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-edge" --allow-file-access-from-files --no-first-run --no-default-browser-check --disable-default-apps "%~dp0index.html"
     echo App opened in Edge!
     goto :success
 )
 
 REM Try Chrome
 if exist "%ProgramFiles%\Google\Chrome\Application\chrome.exe" (
-    start "" "%ProgramFiles%\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-chrome" --allow-file-access-from-files "%~dp0index.html"
+    start "" "%ProgramFiles%\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-chrome" --allow-file-access-from-files --no-first-run --no-default-browser-check --disable-default-apps "%~dp0index.html"
     echo App opened in Chrome!
     goto :success
 )
 
 REM Try Chrome (x86)
 if exist "%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" (
-    start "" "%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-chrome" --allow-file-access-from-files "%~dp0index.html"
+    start "" "%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="%TEMP%\family-tree-chrome" --allow-file-access-from-files --no-first-run --no-default-browser-check --disable-default-apps "%~dp0index.html"
     echo App opened in Chrome!
     goto :success
 )
